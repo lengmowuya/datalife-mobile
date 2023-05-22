@@ -3,6 +3,7 @@ import App from "./../App";
 import Affair from "./../views/affair/affair";
 import Thought from "./../views/thought/thought";
 import User from "./../views/user/user";
+import CompleteAffair from "./../views/completeAffair/completeAffair";
 import ErrorPage from "../error-page";
 const router = createBrowserRouter([
     {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
           path: "user",
           element: <User />,
         },
+        {
+          path: "completeAffair",
+          element: <CompleteAffair />,
+        },
       ],
     },
     {
@@ -35,6 +40,10 @@ const router = createBrowserRouter([
     {
       path: "user",
       element: <User />,
+    },
+    {
+      path: "completeAffair",
+      element: <CompleteAffair />,
     },
   ]);
 export default router;
