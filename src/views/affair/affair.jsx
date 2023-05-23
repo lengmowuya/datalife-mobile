@@ -1,5 +1,8 @@
 import React from 'react';
 import { Button } from 'antd';
+import {
+    CaretUpOutlined
+  } from '@ant-design/icons'
 import axios from 'axios';
 import AffairLi from './affairLi/affairLi';
 import RecordLi from './recordLi/recordLi';
@@ -10,7 +13,8 @@ class Component extends React.Component {
         super(props)
         this.state = {
             affairList:[],
-            todayRecords:[]
+            todayRecords:[],
+            panelActive:false
         }
     }
 
@@ -28,24 +32,32 @@ class Component extends React.Component {
             })
     }
     render() {
-        const {affairList,todayRecords} = this.state;
+        const {affairList,todayRecords,panelActive} = this.state;
         return (
             <div className={styles.content}>
-                <h3>今日完成</h3>
-                <ul className='recordList'>
+                <h3>今日完成记录</h3>
+                <ul className={styles.recordList}>
                     {
                         todayRecords.map(item=>{
                             return <RecordLi item={item} key={item._id} />
                         })
                     }
                 </ul>
-                <ul className={styles.affairList}>
-                    {
-                        affairList.map(item=>{
-                            return <AffairLi item={item} key={item._id} />
-                        })
-                    }
-                </ul>
+                <div 
+                    id={styles.myAffairPanel} 
+                    className={[panelActive?styles.active:'']} 
+                    onClick={()=>this.setState({panelActive:!panelActive})}>
+                    <div className={styles.scrollHand}>
+                        <h3>我的事务 </h3>  <CaretUpOutlined />
+                    </div>
+                    <ul className={styles.affairList}>
+                        {
+                            affairList.map(item=>{
+                                return <AffairLi item={item} key={item._id} />
+                            })
+                        }
+                    </ul>
+                </div>
             </div>
         )
     }

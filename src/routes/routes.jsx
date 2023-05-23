@@ -24,7 +24,7 @@ const router = createBrowserRouter([
           element: <User />,
         },
         {
-          path: "completeAffair",
+          path: "completeAffair/:id",
           element: <CompleteAffair />,
         },
       ],
@@ -42,7 +42,7 @@ const router = createBrowserRouter([
       element: <User />,
     },
     {
-      path: "completeAffair",
+      path: "completeAffair/:id",
       element: <CompleteAffair />,
     },
   ]);

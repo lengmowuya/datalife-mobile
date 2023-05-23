@@ -12,7 +12,7 @@ class Component extends React.Component {
     render() {
         const {item} = this.props;
         return (
-            <Link to={`/completeAffair`} className={styles.content}>
+            <Link to={`/completeAffair/`+item._id} className={styles.content}>
                 <div className={styles.iconContainer}>
                     <svg className={styles.icon} aria-hidden="true">
                         <use href={'#icon-' + item.icon} />
