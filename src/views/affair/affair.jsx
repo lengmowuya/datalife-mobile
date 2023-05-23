@@ -20,12 +20,12 @@ class Component extends React.Component {
 
     componentWillMount() {
         let userId = '63d10e85b1b9bf8e3171a68b';
-        axios.get('http://localhost:3000/affair/all/'+ userId)
+        axios.get('http://192.168.1.9:3000/affair/all/'+ userId)
             .then(docs=>{
                 // console.log(docs.data);
                 this.setState({affairList:docs.data});
             })
-        axios.get('http://localhost:3000/affairRecord/today/'+ userId)
+        axios.get('http://192.168.1.9:3000/affairRecord/today/'+ userId)
             .then(docs=>{
                 console.log(docs.data);
                 this.setState({todayRecords:docs.data});
@@ -34,7 +34,8 @@ class Component extends React.Component {
     render() {
         const {affairList,todayRecords,panelActive} = this.state;
         return (
-            <div className={styles.content}>
+            <div className={styles.content}
+                onClick={()=>this.setState({panelActive:false})}>
                 <h3>今日完成记录</h3>
                 <ul className={styles.recordList}>
                     {
@@ -46,7 +47,7 @@ class Component extends React.Component {
                 <div 
                     id={styles.myAffairPanel} 
                     className={[panelActive?styles.active:'']} 
-                    onClick={()=>this.setState({panelActive:!panelActive})}>
+                    onClick={(e)=>{e.stopPropagation();this.setState({panelActive:!panelActive});}}>
                     <div className={styles.scrollHand}>
                         <h3>我的事务 </h3>  <CaretUpOutlined />
                     </div>

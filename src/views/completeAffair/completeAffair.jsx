@@ -16,7 +16,7 @@ function completeRecord(affairContext){
             owner:userId,
             affair:affairId
         }
-        axios.post('http://localhost:3000/affairRecord/add',request)
+        axios.post('http://192.168.1.9:3000/affairRecord/add',request)
             .then(docs=>{
                 if(docs.data.type == 'success'){
                     alert('提交成功');
@@ -38,7 +38,7 @@ function Component (){
 
     useEffect(mounted,[]);
     function mounted(){
-        axios.get('http://localhost:3000/affair/single/'+userId+'/'+affairId)
+        axios.get('http://192.168.1.9:3000/affair/single/'+userId+'/'+affairId)
             .then(docs=>{
                 setAffair(docs.data);
                 console.log(affair);
