@@ -1,4 +1,4 @@
-import { Link,Outlet } from "react-router-dom";
+import { NavLink,Outlet } from "react-router-dom";
 import {
   HomeOutlined,
   BulbOutlined,
@@ -13,15 +13,23 @@ export default function Root() {
         </div>
         <nav>
           <ul>
-            <li className="active">
-              <Link to={`affair`}><HomeOutlined />事务</Link>
-            </li>
-            <li>
-              <Link to={`thought`}><BulbOutlined />想法</Link>
-            </li>
-            <li>
-              <Link to={`user`}><UserOutlined />生涯</Link>
-            </li>
+            <NavLink
+              className={({isActive}) => isActive?"active":""} 
+              to={`affair`}>
+              <div>
+                  <HomeOutlined />事务
+              </div>
+            </NavLink>
+            <NavLink
+              className={({isActive}) => isActive?"active":""} 
+              to={`thought`}>
+              <div><BulbOutlined />想法</div>
+            </NavLink>
+            <NavLink
+              className={({isActive}) => isActive?"active":""} 
+              to={`user`}>
+              <div><UserOutlined />生涯</div>
+            </NavLink>
           </ul>
         </nav>
       </div>

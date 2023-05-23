@@ -17,6 +17,9 @@ class Component extends React.Component {
                         <svg className='icon' aria-hidden="true">
                             <use href={'#icon-' + item.affair.icon} />
                         </svg>
+                        <svg className='shadow' aria-hidden="true">
+                            <use href={'#icon-' + item.affair.icon} />
+                        </svg>
                     </div>
                     <div className="info">
                         <div className='title'>{item.affair.name}</div>
