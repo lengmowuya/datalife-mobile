@@ -2,53 +2,59 @@ import { Button, Checkbox, Form, Input } from 'antd';
 import {NavLink,useNavigate} from 'react-router-dom';
 // import {useState,useRef} from 'react';
 import axios from 'axios';
-import './login.less';
+import './sign.less';
 
 
-const loginUser = ()=>{
-    // console.log(email,password);
-}
-
-// let email = '',password = '';
-const Login = () => {
-    // let [email,setEmail] = useState('xxx');
-    // let [password,setPassword] = useState('xxx');
+// const validatePass = (rule, value, callback) => {
+//     if (value == '') {
+//       callback(new Error('Please input the password'))
+//     } else {
+//       if (ruleForm.checkPass !== '') {
+//         if (!ruleFormRef.value) return
+//         ruleFormRef.value.validateField('checkPass', () => null)
+//       }
+//       callback()
+//     }
+//   }
+const Sign = () => {
     let navigate = useNavigate();
     const [form] = Form.useForm();
-    // const form = useRef('');
-    // console.log(email);
     const onFinish = (data) => {
         // console.log('Success:', data);
         data.passward =  data.password;
-        axios.post('http://192.168.1.9:3000/user/login',data)
+        axios.post('http://192.168.1.9:3000/user/sign',data)
             .then(docs=>{
                 console.log(docs);
                 let data = docs.data;
                 if(data.type == 'success'){
+                    alert('注册成功,欢迎您!');
                     localStorage.setItem('id',data.id);
                     localStorage.setItem('token',data.token);
                     localStorage.setItem('email',data.user.email);
                     localStorage.setItem('name',data.user.name);
                     localStorage.setItem('headImg',data.user.headImg);
                     navigate('/affair');
+                }else if(data.type == 'exist'){
+                    alert("注册用户已存在,请登录!");
+                    navigate('/login');
                 }else{
-                    alert("登录失败,请检查账密后重试");
+
+                    alert("注册错误!请联系DataLife管理员");
+                    // console.log(form,form.setFieldsValue);
                     form.setFieldsValue({
                         'email':'',
-                        'password':''
+                        'password':'',
+                        'passwordAgain':''
                     });
                 }
-                // else if(data.type == 'error'){
-                //     alert("登录错误,请联系DataLife管理员!");
-
             })
     };
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
     return (
-        <div id="Login">
-            <h1>DataLife</h1>
+        <div id="Sign">
+            <h1>注册为用户</h1>
             <Form
                 form={form}
                 // ref={form}
@@ -67,7 +73,7 @@ const Login = () => {
                     name="email"
                     rules={[{
                         required: true,
-                        message: '请输出您的邮箱地址'
+                        message: '邮箱地址不能为空'
                     }]}
                 >
                     <Input className="emailInput" />
@@ -79,8 +85,28 @@ const Login = () => {
                     name="password"
                     rules={[{
                         required: true,
-                        message: '请输入您的密码'
+                        message: '您的密码不能为空'
                     }]}
+                >
+                    <Input.Password className="passwordInput" />
+                </Form.Item>
+
+                <Form.Item
+                    className='ItemLine'
+                    label="确认密码"
+                    name="passwordAgain"
+                    rules={[{
+                        required: true,
+                        message: '密码不能为空',
+                        // validator:validatePass
+                    },({ getFieldValue }) => ({
+                        validator(_, value) {
+                          if (!value || getFieldValue('password') === value) {
+                            return Promise.resolve();
+                          }
+                          return Promise.reject(new Error('两个密码必须完全一致'));
+                        },
+                    })]}
                 >
                     <Input.Password className="passwordInput" />
                 </Form.Item>
@@ -88,27 +114,16 @@ const Login = () => {
                 <Form.Item
                     className='ItemLine '
                 >
-                    <NavLink to="/sign">没有账号,去注册</NavLink> 
+                    <NavLink to="/login">已有账号,去登录→</NavLink> 
                 </Form.Item>
-                {/* <Form.Item
-                    className='ItemLine'
-                    name="remember"
-                    valuePropName="checked"
-                > */}
-                    {/* <Checkbox className='RememberMeBox'>记住我的账密</Checkbox> */}
-                {/* </Form.Item> */}
-
-                {/* <Form.Item  */}
-                    <Button 
-                        className="loginButton" 
-                        type="primary" htmlType="submit"
-                        onClick={loginUser.bind(this)}
-                    >
-                        登录
-                    </Button>
-                {/* </Form.Item> */}
+                <Button 
+                    className="loginButton" 
+                    type="primary" htmlType="submit"
+                >
+                    注册账号
+                </Button>
             </Form>
         </div>
     )
 };
-export default Login;
+export default Sign;
