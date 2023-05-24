@@ -1,4 +1,6 @@
 import { NavLink,Outlet } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   HomeOutlined,
   BulbOutlined,
@@ -6,6 +8,13 @@ import {
 } from '@ant-design/icons';
 import './App.less'
 export default function Root() {
+    let navigate = useNavigate();
+    useEffect(()=>{
+      if(!localStorage.getItem('token')){
+        navigate('/login');
+        // return;
+      }
+    },[])
     return (
       <div className='app'>
         <div className="detail">

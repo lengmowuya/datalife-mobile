@@ -3,8 +3,10 @@ import App from "./../App";
 import Affair from "./../views/affair/affair";
 import Thought from "./../views/thought/thought";
 import User from "./../views/user/user";
+import Login from "./../views/login/login";
 import CompleteAffair from "./../views/completeAffair/completeAffair";
 import ErrorPage from "../error-page";
+
 const router = createBrowserRouter([
     {
       path: "/",
@@ -46,5 +48,10 @@ const router = createBrowserRouter([
       path: "completeAffair/:id",
       element: <CompleteAffair />,
     },
-  ]);
+    {
+      path: "login",
+      element: <Login />,
+    },
+]);
+
 export default router;
