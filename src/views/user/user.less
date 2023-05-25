@@ -1,0 +1,59 @@
+#User{
+    width:100%;
+    .userInfo{
+        display:flex;
+        padding:16px;
+        .headImg{
+            width:80px;
+            height:80px;
+            border-radius: 50%;
+            border:2px solid #fff;
+            margin-right: 10px;
+
+        }
+        .infoDescribe{
+            display: flex;
+            // align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            .name{
+                line-height: 40px;
+                white-space: nowrap;
+                font-size:30px;
+                margin: 0px;
+                font-weight: bold;
+            }
+            .email{
+                line-height: 20px;
+                color:#999;
+            }
+        }
+    }
+    .menu{
+        padding:16px;
+        box-sizing: border-box;
+        width:100%;
+        .itemLine{
+            padding:16px;
+            box-sizing: border-box;
+            background:#fff;
+            border-radius: 10px;
+            width:100%;
+            margin-bottom:10px;
+            font-size:20px;
+            transition: all 0.1s;
+            svg{
+                font-size:20px;
+                margin-right:2px;
+            }
+            &:active{
+                background:#f9f9f9;
+            }
+            &.loginOut:active{
+                background:red;
+                color:#fff;
+            }
+        }
+    }
+
+}

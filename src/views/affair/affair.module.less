@@ -67,6 +67,30 @@
         min-height: 400px;
         max-height: 1200px;
     }
+    .menu{
+        width:100%;
+        padding:10px;
+        padding-bottom:20px;
+        background:#f6f7f9;
+        display:flex;
+        button{
+            flex-grow: 1;
+            height:40px;
+            font-size:16px;
+            letter-spacing: 2px;
+            vertical-align: baseline;
+            display:flex;
+            align-items: center;
+            justify-content: center;
+            svg{
+                font-size:20px;
+                // margin-top:4px;
+            }
+            &:first-child{
+                margin-right: 10px;
+            }
+        }
+    }
     &.active{
         transform: translateY(-60px) translateX(-50%) !important;
         // background:blue !important;

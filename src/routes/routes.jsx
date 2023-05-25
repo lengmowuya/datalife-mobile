@@ -5,6 +5,8 @@ import Thought from "./../views/thought/thought";
 import User from "./../views/user/user";
 import Login from "./../views/login/login";
 import Sign from "./../views/sign/sign";
+import NewAffair from "./../views/newAffair/newAffair";
+import ManageAffair from "./../views/manageAffair/manageAffair";
 import CompleteAffair from "./../views/completeAffair/completeAffair";
 import ErrorPage from "../error-page";
 
@@ -19,6 +21,8 @@ const router = createBrowserRouter([
       { path: "/thought", element: <Thought /> },
       { path: "/user", element: <User /> },
       { path: "/completeAffair/:id", element: <CompleteAffair /> },
+      { path: "/newAffair", element: <NewAffair /> },
+      { path: "/manageAffair", element: <ManageAffair /> },
     ],
   },
   {path: "/affair",element: <Affair />},
@@ -27,6 +31,8 @@ const router = createBrowserRouter([
   {path: "/completeAffair/:id",element: <CompleteAffair />},
   {path: "/login",element: <Login />},
   {path: "/sign",element: <Sign />},
+  { path: "/newAffair", element: <NewAffair /> },
+  { path: "/manageAffair", element: <ManageAffair /> }
 ]);
 
 export default router;

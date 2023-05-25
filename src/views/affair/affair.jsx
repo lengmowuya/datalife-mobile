@@ -1,67 +1,78 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
+import {useNavigate} from 'react-router-dom';
 import { Button } from 'antd';
 import {
-    CaretUpOutlined
+    CaretUpOutlined,
+    AppstoreOutlined,
+    CarryOutOutlined
   } from '@ant-design/icons'
 import axios from 'axios';
 import AffairLi from './affairLi/affairLi';
 import RecordLi from './recordLi/recordLi';
 import 'antd/dist/reset.css';
 import styles from './affair.module.less';
-class Component extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            affairList:[],
-            todayRecords:[],
-            panelActive:false
-        }
-    }
 
-    componentWillMount() {
-        let userId = '63d10e85b1b9bf8e3171a68b';
+const Affair = ()=>{
+    const navigate = useNavigate();
+
+    let [affairList,setAffairList] = useState([]);
+    let [todayRecords,setTodayRecords] = useState([]);
+    let [panelActive,setPanelActive] = useState(false);
+    // let userId = '63d10e85b1b9bf8e3171a68b';
+    let userId = localStorage.getItem('id');
+
+    useEffect(()=>{
+        if(!userId) return;
         axios.get('http://192.168.1.9:3000/affair/all/'+ userId)
             .then(docs=>{
-                // console.log(docs.data);
-                this.setState({affairList:docs.data});
+                setAffairList(docs.data);
             })
         axios.get('http://192.168.1.9:3000/affairRecord/today/'+ userId)
             .then(docs=>{
-                console.log(docs.data);
-                this.setState({todayRecords:docs.data});
+                setTodayRecords(docs.data);
             })
+    },[])
+    const jump = (href)=>{
+        navigate(href);
     }
-    render() {
-        const {affairList,todayRecords,panelActive} = this.state;
-        return (
-            <div className={styles.content}
-                onClick={()=>this.setState({panelActive:false})}>
-                <h3>今日完成记录</h3>
-                <ul className={styles.recordList}>
+
+    return (
+        <div className={styles.content}
+            onClick={()=>setPanelActive(false)}>
+            <h3>今日完成记录</h3>
+            <ul className={styles.recordList}>
+                {
+                    todayRecords.map(item=>{
+                        return <RecordLi item={item} key={item._id} />
+                    })
+                }
+            </ul>
+            <div 
+                id={styles.myAffairPanel} 
+                className={[panelActive?styles.active:'']} 
+                onClick={(e)=>{e.stopPropagation();setPanelActive(!panelActive);}}
+            >
+                <div className={styles.scrollHand}>
+                    <h3>我的事务 </h3>  <CaretUpOutlined />
+                </div>
+                <ul className={styles.affairList}>
                     {
-                        todayRecords.map(item=>{
-                            return <RecordLi item={item} key={item._id} />
+                        affairList.map(item=>{
+                            return <AffairLi item={item} key={item._id} />
                         })
                     }
                 </ul>
-                <div 
-                    id={styles.myAffairPanel} 
-                    className={[panelActive?styles.active:'']} 
-                    onClick={(e)=>{e.stopPropagation();this.setState({panelActive:!panelActive});}}>
-                    <div className={styles.scrollHand}>
-                        <h3>我的事务 </h3>  <CaretUpOutlined />
-                    </div>
-                    <ul className={styles.affairList}>
-                        {
-                            affairList.map(item=>{
-                                return <AffairLi item={item} key={item._id} />
-                            })
-                        }
-                    </ul>
+                <div className={styles.menu}>
+                    <Button type="primary" icon={<AppstoreOutlined />} onClick={(e)=>{e.stopPropagation();jump('/manageAffair')}} >
+                        管理事务
+                    </Button>
+                    <Button type="primary" icon={<CarryOutOutlined />} onClick={(e)=>{e.stopPropagation();jump('/newAffair')}}>
+                        新建事务
+                    </Button>
                 </div>
             </div>
-        )
-    }
+        </div>
+    )
 }
 
-export default Component
+export default Affair

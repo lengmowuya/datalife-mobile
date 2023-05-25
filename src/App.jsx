@@ -1,18 +1,17 @@
-import { NavLink,Outlet } from "react-router-dom";
+import { NavLink,Outlet,useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import {
   HomeOutlined,
   BulbOutlined,
   UserOutlined
 } from '@ant-design/icons';
 import './App.less'
+
 export default function Root() {
     let navigate = useNavigate();
     useEffect(()=>{
       if(!localStorage.getItem('token')){
         navigate('/login');
-        // return;
       }
     },[])
     return (

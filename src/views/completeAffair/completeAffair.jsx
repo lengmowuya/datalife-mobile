@@ -47,7 +47,7 @@ function Component (){
     }
 
     return (
-        <div id='completeAffair'>
+        <div id='CompleteAffair'>
             {/* <h2>完成事项</h2> */}
             <div className="head">
                 <div className='iconContainer'>
@@ -64,7 +64,8 @@ function Component (){
                 value={affairContext}
                 onChange={(e) => setAffairContext(e.target.value)} 
                 cols="30" rows="10" placeholder="事务完成感悟..."></textarea>
-            <Button type="primary" onClick={completeRecord.bind(this,affairContext)}>完成</Button>
+            <Button type="primary" className='affairFinish' onClick={completeRecord.bind(this,affairContext)}>完成</Button>
+            <Button type="primary" className='affairCancel' onClick={()=>{navigate('/affair')}}>取消</Button>
         </div>
     )
 }

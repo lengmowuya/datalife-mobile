@@ -1,4 +1,4 @@
-#completeAffair{
+#CompleteAffair{
     width:100%;
     display:flex;
     flex-direction: column;
@@ -55,10 +55,25 @@
         box-shadow: inset 0px 0px 9px #1677ff11;
         resize:none;
     }
-    button{
+    .affairFinish,
+    .affairCancel{
         margin:10px;
         height:54px;
         font-size:20px;
         width:100%;
+        transition: all 0.3s;
+        &:active{
+            background-color: #0958d9;
+        }
+    }
+    .affairCancel{
+        margin-top:0px;
+        // opacity: 0.2;
+        background:#f9f9f9;
+        border:1px solid #eee;
+        color:#999;
+        &:active{
+            background-color: #eee;
+        }
     }
 }
