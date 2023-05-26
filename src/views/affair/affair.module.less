@@ -13,10 +13,12 @@
     }
     .recordList{
         width:100%;
+        height: 100%;
         padding:14px;
         box-sizing: border-box;
         padding-top:60px;
         padding-bottom:100px;
+
     }
     box-sizing: border-box;
 }
@@ -57,6 +59,7 @@
     }
     .affairList{
         width:100vw;
+        // height:100%;
         background:#f6f7f9;
         padding:20px 20px;
         // padding-top:0px;
@@ -64,14 +67,23 @@
         display:flex;
         flex-direction: column;
         margin:0px;
-        min-height: 400px;
-        max-height: 1200px;
+        min-height: 200px;
+        max-height: 500px;
+        overflow-y: scroll;
+        .nullHint{
+            flex-grow: 1;
+            opacity: 1;
+            height: 100%;
+            color:#1677ff66;
+            // text-shadow: 0px 0px 3px #eee;
+        }
     }
     .menu{
         width:100%;
         padding:10px;
-        padding-bottom:20px;
+        // padding-bottom:20px;
         background:#f6f7f9;
+        background:#fff;
         display:flex;
         button{
             flex-grow: 1;
@@ -95,11 +107,25 @@
         transform: translateY(-60px) translateX(-50%) !important;
         // background:blue !important;
         border:none;
-        box-shadow: 0px 0px 12px #4d97e766;
+        box-shadow: 0px 0px 60px #4d97e766;
         .scrollHand{
             svg{
                 transform: rotateZ(180deg);
             }
         }
+    }
+}
+.nullHint{
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color:#fff;
+    opacity: 0.8;
+    svg{
+        font-size:90px;
+        margin-bottom:5px;
     }
 }

@@ -4,7 +4,8 @@ import { Button } from 'antd';
 import {
     CaretUpOutlined,
     AppstoreOutlined,
-    CarryOutOutlined
+    CarryOutOutlined,
+    DropboxOutlined
   } from '@ant-design/icons'
 import axios from 'axios';
 import AffairLi from './affairLi/affairLi';
@@ -46,6 +47,12 @@ const Affair = ()=>{
                         return <RecordLi item={item} key={item._id} />
                     })
                 }
+                {todayRecords.length==0?(
+                    <div className={styles.nullHint}>
+                        <DropboxOutlined />
+                        今日还没有事务已完成
+                    </div>
+                ):''}
             </ul>
             <div 
                 id={styles.myAffairPanel} 
@@ -55,13 +62,21 @@ const Affair = ()=>{
                 <div className={styles.scrollHand}>
                     <h3>我的事务 </h3>  <CaretUpOutlined />
                 </div>
+
                 <ul className={styles.affairList}>
                     {
                         affairList.map(item=>{
                             return <AffairLi item={item} key={item._id} />
                         })
                     }
+                    {affairList.length==0?(
+                    <div className={styles.nullHint}>
+                        {/* <DropboxOutlined /> */}
+                        暂无事务,新建一个吧!
+                    </div>
+                ):''}
                 </ul>
+
                 <div className={styles.menu}>
                     <Button type="primary" icon={<AppstoreOutlined />} onClick={(e)=>{e.stopPropagation();jump('/manageAffair')}} >
                         管理事务

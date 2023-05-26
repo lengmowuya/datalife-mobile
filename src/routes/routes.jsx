@@ -8,6 +8,7 @@ import Sign from "./../views/sign/sign";
 import NewAffair from "./../views/newAffair/newAffair";
 import ManageAffair from "./../views/manageAffair/manageAffair";
 import CompleteAffair from "./../views/completeAffair/completeAffair";
+import EditAffair from "./../views/editAffair/editAffair";
 import ErrorPage from "../error-page";
 
 const router = createBrowserRouter([
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
       { path: "/thought", element: <Thought /> },
       { path: "/user", element: <User /> },
       { path: "/completeAffair/:id", element: <CompleteAffair /> },
+      { path: "/editAffair/:id", element: <EditAffair /> },
       { path: "/newAffair", element: <NewAffair /> },
       { path: "/manageAffair", element: <ManageAffair /> },
     ],
@@ -29,6 +31,7 @@ const router = createBrowserRouter([
   {path: "/thought",element: <Thought />},
   {path: "/user",element: <User />},
   {path: "/completeAffair/:id",element: <CompleteAffair />},
+  { path: "/editAffair/:id", element: <EditAffair /> },
   {path: "/login",element: <Login />},
   {path: "/sign",element: <Sign />},
   { path: "/newAffair", element: <NewAffair /> },

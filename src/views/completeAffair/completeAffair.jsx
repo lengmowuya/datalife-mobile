@@ -6,7 +6,8 @@ import { useParams,useNavigate  } from 'react-router-dom';
 
 let navigate;
 let affairId;
-let userId = '63d10e85b1b9bf8e3171a68b';
+let userId = localStorage.getItem('id');
+
 
 function completeRecord(affairContext){
     // const {affairContext,affairId} = this.state;
@@ -64,8 +65,14 @@ function Component (){
                 value={affairContext}
                 onChange={(e) => setAffairContext(e.target.value)} 
                 cols="30" rows="10" placeholder="事务完成感悟..."></textarea>
-            <Button type="primary" className='affairFinish' onClick={completeRecord.bind(this,affairContext)}>完成</Button>
-            <Button type="primary" className='affairCancel' onClick={()=>{navigate('/affair')}}>取消</Button>
+            <Button 
+                type="primary" className='affairFinish' 
+                onClick={completeRecord.bind(this,affairContext)}
+            >完成</Button>
+            <Button 
+                type="primary" className='affairCancel' 
+                onClick={()=>{navigate('/affair')}}
+            >返回</Button>
         </div>
     )
 }
