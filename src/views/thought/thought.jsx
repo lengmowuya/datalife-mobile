@@ -82,11 +82,11 @@ const Thought = ()=>{
                                             item.thought.map(item=>{
                                                 return (
                                                     <div className='thoughtLi' key={item._id}>
+                                                        <div className="time">
+                                                            {tools.getTimeString(item)}&nbsp;&nbsp;{dayjs(new Date(item.time)).fromNow().replace(' ','')}
+                                                        </div>
                                                         <div className="text">
                                                             {item.text}
-                                                        </div>
-                                                        <div className="time">
-                                                            {dayjs(new Date(item.time)).fromNow().replace(' ','')}&nbsp;&nbsp;{tools.getTimeString(item)}
                                                         </div>
                                                     </div>
                                                 )

@@ -50,6 +50,7 @@ const NewAffair = ()=>{
     },[])
     return (
         <div id='NewAffair' onClick={(e)=>{setPanelActive(false);}}>
+            <h3>新建事务</h3>
             <div className="head">
                 <div className='iconContainer' onClick={(e)=>{e.stopPropagation();setPanelActive(!panelActive);}}>
                     <svg className='icon' aria-hidden="true" >
