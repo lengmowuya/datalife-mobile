@@ -1,4 +1,5 @@
 import React from 'react';
+import tools from './../../../tools/Tools'
 import './recordLi.less'
 class Component extends React.Component {
     constructor(props) {
@@ -23,7 +24,7 @@ class Component extends React.Component {
                     </div>
                     <div className="info">
                         <div className='title'>{item.affair.name}</div>
-                        <p className='describe'>{new Date(item.affair.time).toDateString()}</p>
+                        <p className='describe'>{tools.getTimeString(item.affair)}</p>
                     </div>
                 </div>
                 <div className="sentence">

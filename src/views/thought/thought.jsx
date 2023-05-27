@@ -4,6 +4,7 @@ import axios from 'axios';
 import {
     DropboxOutlined
   } from '@ant-design/icons'
+import tools from './../../tools/Tools'
 import './thought.less'
 
 const Thought = ()=>{
@@ -44,7 +45,12 @@ const Thought = ()=>{
                         thoughtList.map(item=>{
                             return (
                                 <div className='thoughtLi' key={item._id}>
-                                    {item.text}
+                                    <div className="text">
+                                        {item.text}
+                                    </div>
+                                    <div className="time">
+                                        {tools.getTimeString(item)}
+                                    </div>
                                 </div>
                             )
                         })

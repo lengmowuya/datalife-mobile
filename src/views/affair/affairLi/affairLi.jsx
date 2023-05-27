@@ -1,14 +1,13 @@
 import React from 'react';
 import { Link,Outlet } from "react-router-dom";
 import styles from './affairLi.module.less'
+
 class Component extends React.Component {
     constructor(props) {
         super(props)
         this.state = {}
     }
-
     componentDidMount() {}
-
     render() {
         const {item} = this.props;
         return (
