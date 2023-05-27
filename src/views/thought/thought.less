@@ -5,18 +5,33 @@
     .thoughtList{
         height:100%;
         padding:10px;
-        .thoughtLi{
+        overflow-y:scroll;
+        padding-bottom:130px;
+        .dateLi{
             padding:10px;
-            background:#fff;
-            border-radius: 10px;
-            margin-bottom:10px;
-            font-size:18px;
-            .text{
-                padding:10px;
+            .dateTitle{
+
+                h3{
+                    text-align: center;
+                    color:#98a3b7;
+                    margin-bottom:20px;
+                    opacity: 0.5;
+                }
             }
-            .time{
-                font-size:14px;
-                color:#ccc;
+            .thoughtLi{
+                padding:10px;
+                background:#fff;
+                border-radius: 10px;
+                margin-bottom:10px;
+                font-size:18px;
+                .text{
+                    padding:10px;
+                    padding-left:0px;
+                }
+                .time{
+                    font-size:14px;
+                    color:#ccc;
+                }
             }
         }
 
@@ -26,9 +41,14 @@
         left:0;
         bottom:0;
         display:flex;
-        padding:10px;
+        padding:8px;
         width:100%;
         align-items: flex-end;
+        background:#fff;
+        border-top:1px solid #eee;
+        box-shadow: 0px 0px 9px #ddd;
+
+        // position: relative;
         .thoughtInput{
             padding:10px;
             border-radius: 10px;
@@ -36,15 +56,25 @@
             outline: none;
             resize:none;
             flex-grow: 1;
-            margin-right:6px;
+            // margin-right:6px;
             min-height: 100px;
             font-size:18px;
+            border:1px solid #ddd;
+            background:#f6f7f9;
+            box-shadow: inset 0px 0px 9px #1677ff11;
+            transition: all 0.2s;
+            padding-bottom:50px;
             &::placeholder{
                 color:#ccc;
             }
+            &:focus{
+                min-height: 200px;
+            }
         }
         .thoughtPublish{
-    
+            position: absolute;
+            right:14px;
+            bottom:14px;
         }
     }
 

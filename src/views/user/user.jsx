@@ -11,6 +11,7 @@ import * as echarts from 'echarts';
 import 'dayjs/locale/zh-cn'
 import dayjs from 'dayjs';
 import './user.less'
+import Config from './../../tools/Config'
 
 const User = ()=>{
     dayjs.locale('zh-cn');
@@ -27,6 +28,9 @@ const User = ()=>{
         localStorage.setItem('id','');
         navigate('/login');
     }
+    useEffect(()=>{
+        userId = localStorage.getItem('id');
+    })
     useEffect(()=>{
         // 梳理出7天
         let days = [];
@@ -49,7 +53,7 @@ const User = ()=>{
         setXAxis(days);
     },[])
     useEffect(()=>{
-        axios.get('http://192.168.1.9:3000/affairRecord/recent7/'+userId)
+        axios.get(Config.getIp()+'/affairRecord/recent7/'+userId)
             .then(docs=>{
                 // console.log(docs.data);
                 let mapList = xAxis.concat();
@@ -113,9 +117,9 @@ const User = ()=>{
                 <ThoughtCareer />
             </div>
             <div className="menu">
-                <div className="itemLine setting">
+                {/* <div className="itemLine setting">
                     <SettingOutlined />设置
-                </div>
+                </div> */}
                 <div className="itemLine loginOut" onClick={loginOut.bind(this)}>
                     <ExportOutlined />登出
                 </div>

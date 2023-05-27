@@ -12,23 +12,24 @@ import AffairLi from './affairLi/affairLi';
 import RecordLi from './recordLi/recordLi';
 import 'antd/dist/reset.css';
 import styles from './affair.module.less';
-
+import Config from './../../tools/Config'
 const Affair = ()=>{
     const navigate = useNavigate();
-
     let [affairList,setAffairList] = useState([]);
     let [todayRecords,setTodayRecords] = useState([]);
     let [panelActive,setPanelActive] = useState(false);
     // let userId = '63d10e85b1b9bf8e3171a68b';
     let userId = localStorage.getItem('id');
-
+    useEffect(()=>{
+        userId = localStorage.getItem('id');
+    })
     useEffect(()=>{
         if(!userId) return;
-        axios.get('http://192.168.1.9:3000/affair/all/'+ userId)
+        axios.get(Config.getIp()+'/affair/all/'+ userId)
             .then(docs=>{
                 setAffairList(docs.data);
             })
-        axios.get('http://192.168.1.9:3000/affairRecord/today/'+ userId)
+        axios.get(Config.getIp()+'/affairRecord/today/'+ userId)
             .then(docs=>{
                 setTodayRecords(docs.data);
             })

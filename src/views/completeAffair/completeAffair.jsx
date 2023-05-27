@@ -3,7 +3,7 @@ import axios from 'axios';
 import './completeAffair.less';
 import { Button } from 'antd';
 import { useParams,useNavigate  } from 'react-router-dom';
-
+import Config from './../../tools/Config'
 let navigate;
 let affairId;
 let userId = localStorage.getItem('id');
@@ -17,7 +17,7 @@ function completeRecord(affairContext){
             owner:userId,
             affair:affairId
         }
-        axios.post('http://192.168.1.9:3000/affairRecord/add',request)
+        axios.post(Config.getIp()+'/affairRecord/add',request)
             .then(docs=>{
                 if(docs.data.type == 'success'){
                     alert('提交成功');
@@ -36,10 +36,13 @@ function Component (){
     // let [affairId, setAffairId] = useState(id);
     let [affair, setAffair] = useState({});
     navigate = useNavigate()
-
+    console.log(userId);
+    useEffect(()=>{
+        userId = localStorage.getItem('id');
+    })
     useEffect(mounted,[]);
     function mounted(){
-        axios.get('http://192.168.1.9:3000/affair/single/'+userId+'/'+affairId)
+        axios.get(Config.getIp()+'/affair/single/'+userId+'/'+affairId)
             .then(docs=>{
                 setAffair(docs.data);
                 console.log(affair);
@@ -49,6 +52,7 @@ function Component (){
 
     return (
         <div id='CompleteAffair'>
+            <h3>完成事务</h3>
             {/* <h2>完成事项</h2> */}
             <div className="head">
                 <div className='iconContainer'>

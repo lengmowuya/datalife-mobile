@@ -4,17 +4,21 @@ import {
     BulbOutlined
   } from '@ant-design/icons';
 import axios from 'axios';
+import Config from './../../../tools/Config'
 
 const ThoughtCareer = ()=>{
     let [thoughtLength,setThoughtLength] = useState(0)
     let [thoughtDays,setThoughtDays] = useState(0)
     let userId = localStorage.getItem('id');
     useEffect(()=>{
-        axios.get('http://192.168.1.9:3000/thought/length/'+userId)
+        userId = localStorage.getItem('id');
+    })
+    useEffect(()=>{
+        axios.get(Config.getIp()+'/thought/length/'+userId)
             .then(docs=>{
                 setThoughtLength(docs.data.length);
             })
-        axios.get('http://192.168.1.9:3000/thought/days/'+userId)
+        axios.get(Config.getIp()+'/thought/days/'+userId)
             .then(docs=>{
                 setThoughtDays(docs.data.days);
             })

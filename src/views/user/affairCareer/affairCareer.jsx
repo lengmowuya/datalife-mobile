@@ -4,17 +4,21 @@ import {
     CheckSquareOutlined
   } from '@ant-design/icons';
 import axios from 'axios';
+import Config from './../../../tools/Config'
 
 const AffairCareer = ()=>{
     let [affairRecordLength,setAffairRecordLength] = useState(0)
     let [affairRecordDays,setAffairRecordDays] = useState(0)
     let userId = localStorage.getItem('id');
     useEffect(()=>{
-        axios.get('http://192.168.1.9:3000/affairRecord/length/'+userId)
+        userId = localStorage.getItem('id');
+    })
+    useEffect(()=>{
+        axios.get(Config.getIp()+'/affairRecord/length/'+userId)
             .then(docs=>{
                 setAffairRecordLength(docs.data.length);
             })
-        axios.get('http://192.168.1.9:3000/affairRecord/days/'+userId)
+        axios.get(Config.getIp()+'/affairRecord/days/'+userId)
             .then(docs=>{
                 setAffairRecordDays(docs.data.days);
             })

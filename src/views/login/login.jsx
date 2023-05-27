@@ -3,7 +3,7 @@ import {NavLink,useNavigate} from 'react-router-dom';
 // import {useState,useRef} from 'react';
 import axios from 'axios';
 import './login.less';
-
+import Config from './../../tools/Config'
 
 const loginUser = ()=>{
     // console.log(email,password);
@@ -20,7 +20,7 @@ const Login = () => {
     const onFinish = (data) => {
         // console.log('Success:', data);
         data.passward =  data.password;
-        axios.post('http://192.168.1.9:3000/user/login',data)
+        axios.post(Config.getIp()+'/user/login',data)
             .then(docs=>{
                 console.log(docs);
                 let data = docs.data;

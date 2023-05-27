@@ -6,6 +6,7 @@ import {
   } from '@ant-design/icons'
 import { useParams,useNavigate  } from 'react-router-dom';
 import './newAffair.less'
+import Config from './../../tools/Config'
 
 let affair = {};
 let affairContext = '';
@@ -16,16 +17,20 @@ const NewAffair = ()=>{
     let [affairDescribe,setAffairDescribe] = useState('');
     let [panelActive,setPanelActive] = useState(false);
     let [activeIconIndex,setActiveIconIndex] = useState(0);
+    let userId = localStorage.getItem('id');
+    useEffect(()=>{
+        userId = localStorage.getItem('id');
+    })
     const CreateAffair = ()=>{
         console.log(affairName.trim(),affairDescribe.trim());
         if(!affairName.trim() || !affairDescribe.trim()) {alert('名称或描述不能为空!');return;}
         let newAffair = {
-            owner : localStorage.getItem('id'),
+            owner : userId,
             name:affairName,
             describe:affairDescribe,
             icon:iconList[activeIconIndex].font_class
         }
-        axios.post('http://192.168.1.9:3000/affair/add',newAffair)
+        axios.post(Config.getIp()+'/affair/add',newAffair)
             .then(docs=>{
                 if(docs.data.type == 'success'){
                     alert('新事物创建成功');
@@ -36,7 +41,7 @@ const NewAffair = ()=>{
             })
     }
     useEffect(()=>{
-        axios.get('http://192.168.1.9:3000/icon/all')
+        axios.get(Config.getIp()+'/icon/all')
             .then(docs=>{
                 console.log(docs.data);
                 setIconList(docs.data);

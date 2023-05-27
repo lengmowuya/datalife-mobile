@@ -7,7 +7,7 @@ import {
   } from '@ant-design/icons'
 import { useParams,useNavigate  } from 'react-router-dom';
 import './editAffair.less'
-
+import Config from './../../tools/Config'
 // let affair = {};
 let affairContext = '';
 const EditAffair = ()=>{
@@ -20,6 +20,9 @@ const EditAffair = ()=>{
     let [affairDescribe,setAffairDescribe] = useState('');
     let [panelActive,setPanelActive] = useState(false);
     let [activeIconIndex,setActiveIconIndex] = useState(0);
+    useEffect(()=>{
+        userId = localStorage.getItem('id');
+    })
     const CreateAffair = ()=>{
         console.log(affairName.trim(),affairDescribe.trim());
         if(!affairName.trim() || !affairDescribe.trim()) {alert('名称或描述不能为空!');return;}
@@ -29,7 +32,7 @@ const EditAffair = ()=>{
             describe:affairDescribe,
             icon:iconList[activeIconIndex].font_class
         }
-        axios.post('http://192.168.1.9:3000/affair/update',newAffair)
+        axios.post(Config.getIp()+'/affair/update',newAffair)
             .then(docs=>{
                 console.log(docs);
                 if(docs.data.type == 'success'){
@@ -42,7 +45,7 @@ const EditAffair = ()=>{
     }
     
     useEffect(()=>{
-        axios.get('http://192.168.1.9:3000/affair/single/'+userId+'/'+id)
+        axios.get(Config.getIp()+'/affair/single/'+userId+'/'+id)
         .then(docs=>{
             let affair = docs.data;
             // console.log(affair);
@@ -59,7 +62,7 @@ const EditAffair = ()=>{
 
     },[iconList])
     useEffect(()=>{
-        axios.get('http://192.168.1.9:3000/icon/all')
+        axios.get(Config.getIp()+'/icon/all')
             .then(docs=>{
                 console.log(docs.data);
                 setIconList(docs.data);
@@ -70,7 +73,7 @@ const EditAffair = ()=>{
     const deleteAffair = ()=>{
         if(confirm('您确定要删除该事务吗,该操作不可逆!')){
             if(confirm('再次确认以继续删除该事务')){
-                axios.post('http://192.168.1.9:3000/affair/remove',{id})
+                axios.post(Config.getIp()+'/affair/remove',{id})
                     .then(docs=>{
                         if(docs.data.type == 'success'){
                             setTimeout(()=>{

@@ -5,14 +5,17 @@ import {
     DropboxOutlined
   } from '@ant-design/icons'
 import './manageAffair.less'
-
+import Config from './../../tools/Config'
 // let affairList = [];
 const ManageAffair = ()=>{
     let [affairList,setAffairList] = useState([]);
     let userId = localStorage.getItem('id');
     // let [affairList,setAffairList] = useState([]);
     useEffect(()=>{
-        axios.get('http://192.168.1.9:3000/affair/all/'+ userId)
+        userId = localStorage.getItem('id');
+    })
+    useEffect(()=>{
+        axios.get(Config.getIp()+'/affair/all/'+ userId)
         .then(docs=>{
             setAffairList(docs.data);
         })
