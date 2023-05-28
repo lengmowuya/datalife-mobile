@@ -6,7 +6,7 @@ import {
   UserOutlined
 } from '@ant-design/icons';
 import './App.less'
-
+import Tool from './tools/Tools'
 export default function Root() {
     let navigate = useNavigate();
     useEffect(()=>{
@@ -14,6 +14,12 @@ export default function Root() {
         navigate('/login');
       }
     },[])
+    useEffect(()=>{
+      if(document.body.clientWidth >= 800){
+          console.log(document.body.clientWidth);
+          window.location.href= Tool.config.normalAddress;
+      }
+    })
     return (
       <div className='app'>
         <div className="detail">

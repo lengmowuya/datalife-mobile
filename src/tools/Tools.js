@@ -108,4 +108,10 @@ if(Tool.config.process == "development"){
 }else{
     Tool.config.address = "http://" + "101.35.144.20:3000";
 }
+
+if(Tool.config.process == "development"){
+    Tool.config.normalAddress = "http://192.168.1.9:8080";
+}else{
+    Tool.config.normalAddress = "http://101.35.144.20:8080";
+}
 export default Tool;
