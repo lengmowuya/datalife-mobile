@@ -1,4 +1,4 @@
-import { RouterProvider, createBrowserRouter, Link, Outlet,Navigate } from "react-router-dom";
+import { RouterProvider, createHashRouter, Link, Outlet,Navigate } from "react-router-dom";
 import App from "./../App";
 import Affair from "./../views/affair/affair";
 import Thought from "./../views/thought/thought";
@@ -11,7 +11,7 @@ import CompleteAffair from "./../views/completeAffair/completeAffair";
 import EditAffair from "./../views/editAffair/editAffair";
 import ErrorPage from "../error-page";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <App />,
