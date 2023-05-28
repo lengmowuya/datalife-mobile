@@ -32,7 +32,7 @@ const AffairCareer = ()=>{
                 事务
             </div>
             <div className="details">
-                <p>累计完成数: <span className="num">{affairRecordLength}</span>      </p>
+                <p>累计记录: <span className="num">{affairRecordLength}</span>      </p>
                 <p>累计天数: <span className="num">{affairRecordDays}</span> </p>
             </div>
         </div>

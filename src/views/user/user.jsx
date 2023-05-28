@@ -78,7 +78,10 @@ const User = ()=>{
     },[xAxis])
     // 基于准备好的dom，初始化echarts实例
     useEffect(()=>{
-        var myChart = echarts.init(document.querySelector('.chart'));
+        var myChart = echarts.init(document.querySelector('.chart'),null,{
+            width: 376,
+            height: 310
+          });
         let option = {
             xAxis: {
               type: 'category',

@@ -1,4 +1,4 @@
-import { RouterProvider, createBrowserRouter, Link, Outlet } from "react-router-dom";
+import { RouterProvider, createBrowserRouter, Link, Outlet,Navigate } from "react-router-dom";
 import App from "./../App";
 import Affair from "./../views/affair/affair";
 import Thought from "./../views/thought/thought";
@@ -25,6 +25,11 @@ const router = createBrowserRouter([
       { path: "/editAffair/:id", element: <EditAffair /> },
       { path: "/newAffair", element: <NewAffair /> },
       { path: "/manageAffair", element: <ManageAffair /> },
+      // 这里
+      {
+        path: "",
+        element: <Navigate to="affair" replace />
+      }
     ],
   },
   {path: "/affair",element: <Affair />},
