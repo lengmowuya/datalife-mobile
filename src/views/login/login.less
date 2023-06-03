@@ -5,13 +5,28 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding:20px;
+    padding:30px;
     box-sizing: border-box;
-    h1{
-        font-weight: bold;
-        color:#1677ff;
-        font-size:40px;
-        margin-bottom:60px;
+
+    .header{
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-bottom:40px;
+        img{
+            width:120px;
+            height:120px;
+        }
+        h1{
+            font-weight: bold;
+            color:#145ab8;
+            font-size:28px;
+            margin:0px;
+            margin-left:3px;
+            margin-top:3px;
+            // margin-bottom:60px;
+        }
     }
     form{
         width:100%;
@@ -21,18 +36,20 @@
         justify-content: center;
         label{
             font-size: 16px;
+            // opacity: 0.;
             &::before{
                 font-size: 16px;
             }
         }
+        input{
+            font-size:20px;
+        }
         .ItemLine{
             width:100%;
+            margin-bottom:10px;
             .emailInput,
             .passwordInput{
                 height:46px;
-            }
-            a{
-                // text-decoration: underline;
             }
         }
         .RememberMeBox{

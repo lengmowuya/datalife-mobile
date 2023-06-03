@@ -1,4 +1,4 @@
-import { NavLink,Outlet,useNavigate } from "react-router-dom";
+import { NavLink,Outlet,useNavigate,useLocation,useOutlet } from "react-router-dom";
 import { useEffect } from "react";
 import {
   HomeOutlined,
@@ -8,11 +8,14 @@ import {
 import './App.less'
 import Tool from './tools/Tools'
 import { Button, message, Space } from 'antd';
+import  {TransitionGroup, CSSTransition,SwitchTransition}  from 'react-transition-group'
 import axios from 'axios';
 
 export default function Root() {
     const [messageApi, contextHolder] = message.useMessage();
     let navigate = useNavigate();
+    const currentOutlet = useOutlet();
+    const location = useLocation();
     useEffect(()=>{
       if(!localStorage.getItem('token')){
         navigate('/login');
@@ -24,9 +27,6 @@ export default function Root() {
           window.location.href= Tool.config.normalAddress;
       }
     })
-    useEffect(()=>{
-
-    },[])
             // 请求拦截器-添加token信息
             axios.interceptors.request.use(function (config) {
               config.headers.token = localStorage.getItem('token');
@@ -55,11 +55,23 @@ export default function Root() {
                   content: "用户Token已过期,请重新登录"
                 });
             })
+
+    const { nodeRef } = router.find((route) => route.path === location.pathname) ?? {}
     return (
       <div className='app'>
         {contextHolder}
         <div className="detail">
-            <Outlet />
+        <TransitionGroup>
+          <CSSTransition nodeRef={nodeRef} timeout={300} className="page" unmountOnExit key={location.pathname}>
+            {/* <Outlet /> */}
+            {/* {currentOutlet} */}
+            {(state) => (
+              <div ref={nodeRef} className="page">
+                {currentOutlet}
+              </div>
+            )}
+            </CSSTransition>
+  </TransitionGroup>
         </div>
         <nav>
           <ul>

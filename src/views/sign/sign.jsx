@@ -4,6 +4,7 @@ import {useState,useRef} from 'react';
 import axios from 'axios';
 import './sign.less';
 import Config from './../../tools/Config'
+import imgUrl from './../../assets/DataLife.png';
 
 const Sign = () => {
     let navigate = useNavigate();
@@ -77,7 +78,10 @@ const Sign = () => {
     return (
         <div id="Sign">
             {contextHolder}
-            <h1>注册为用户</h1>
+            <div className="header">
+                <img src={imgUrl} alt="" />
+                <h1>DataLife</h1>
+            </div>
             <Form
                 form={form}
                 // ref={form}
@@ -110,18 +114,20 @@ const Sign = () => {
                     <Input className="emailInput" />
                 </Form.Item>
 
-                <Form.Item
-                    className='ItemLine'
-                    label="邮箱验证码"
-                    name="emailCode"
-                    rules={[{
-                        required: true,
-                        message: '请输入邮箱验证码'
-                    }]}
-                >
-                    <Input className="emailCodeInput" />
-                </Form.Item>
-                <Button disabled={sendCode} type="primary" onClick={sendEmailCode.bind()}>{sendCodeButtonText}</Button>
+                <div className="line">
+                    <Form.Item
+                        className='ItemLine'
+                        label="邮箱验证码"
+                        name="emailCode"
+                        rules={[{
+                            required: true,
+                            message: '请输入邮箱验证码'
+                        }]}
+                    >
+                        <Input className="emailCodeInput" />
+                    </Form.Item>
+                    <Button disabled={sendCode} type="primary" onClick={sendEmailCode.bind()}>{sendCodeButtonText}</Button>
+                </div>
 
                 <Form.Item
                     className='ItemLine'
@@ -135,7 +141,7 @@ const Sign = () => {
                     <Input.Password className="passwordInput" />
                 </Form.Item>
 
-                <Form.Item
+                {/* <Form.Item
                     className='ItemLine'
                     label="确认密码"
                     name="passwordAgain"
@@ -153,7 +159,7 @@ const Sign = () => {
                     })]}
                 >
                     <Input.Password className="passwordInput" />
-                </Form.Item>
+                </Form.Item> */}
 
                 <Form.Item
                     className='ItemLine '

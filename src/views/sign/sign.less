@@ -7,11 +7,25 @@
     justify-content: center;
     padding:20px;
     box-sizing: border-box;
-    h1{
-        font-weight: bold;
-        color:#1677ff;
-        font-size:40px;
-        margin-bottom:60px;
+    .header{
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-bottom:40px;
+        img{
+            width:120px;
+            height:120px;
+        }
+        h1{
+            font-weight: bold;
+            color:#145ab8;
+            font-size:28px;
+            margin:0px;
+            margin-left:3px;
+            margin-top:3px;
+            // margin-bottom:60px;
+        }
     }
     form{
         width:100%;
@@ -25,17 +39,33 @@
                 font-size: 16px;
             }
         }
+        input{
+            font-size:20px;
+        }
+        .line{
+            display:flex;
+            // align-items: center;
+            .ItemLine{
+                margin-right:10px;
+                input{
+                    height: 46px;
+                }
+            }
+            button{
+                height: 46px;
+                margin-top:40px;
+            }
+        }
+        .emailCodeInput{
+        }
         .ItemLine{
             width:100%;
-            display:flex;
-            flex-direction: row;
+            margin-bottom:10px;
             .emailInput,
             .passwordInput{
                 height:46px;
             }
-            a{
-                // text-decoration: underline;
-            }
+            // text-decoration: underline;
         }
         .RememberMeBox{
             height:30px;

@@ -4,25 +4,16 @@ import {NavLink,useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import './login.less';
 import Config from './../../tools/Config'
+import imgUrl from './../../assets/DataLife.png';
 
-const loginUser = ()=>{
-    // console.log(email,password);
-}
-
-// let email = '',password = '';
 const Login = () => {
-    // let [email,setEmail] = useState('xxx');
-    // let [password,setPassword] = useState('xxx');
     let navigate = useNavigate();
     const [form] = Form.useForm();
-    // const form = useRef('');
-    // console.log(email);
     const onFinish = (data) => {
-        // console.log('Success:', data);
         data.passward =  data.password;
         axios.post(Config.getIp()+'/user/login',data)
             .then(docs=>{
-                console.log(docs);
+                // console.log(docs);
                 let data = docs.data;
                 if(data.type == 'success'){
                     localStorage.setItem('id',data.id);
@@ -38,17 +29,18 @@ const Login = () => {
                         'password':''
                     });
                 }
-                // else if(data.type == 'error'){
-                //     alert("登录错误,请联系DataLife管理员!");
-
             })
     };
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
+
     return (
         <div id="Login">
-            <h1>DataLife</h1>
+            <div className="header">
+                <img src={imgUrl} alt="" />
+                <h1>DataLife</h1>
+            </div>
             <Form
                 form={form}
                 // ref={form}
@@ -90,23 +82,14 @@ const Login = () => {
                 >
                     <NavLink to="/sign">没有账号,去注册</NavLink> 
                 </Form.Item>
-                {/* <Form.Item
-                    className='ItemLine'
-                    name="remember"
-                    valuePropName="checked"
-                > */}
-                    {/* <Checkbox className='RememberMeBox'>记住我的账密</Checkbox> */}
-                {/* </Form.Item> */}
 
-                {/* <Form.Item  */}
-                    <Button 
-                        className="loginButton" 
-                        type="primary" htmlType="submit"
-                        onClick={loginUser.bind(this)}
-                    >
-                        登录
-                    </Button>
-                {/* </Form.Item> */}
+                <Button 
+                    className="loginButton" 
+                    type="primary" htmlType="submit"
+                    // onClick={loginUser.bind(this)}
+                >
+                    登录
+                </Button>
             </Form>
         </div>
     )

@@ -1,3 +1,4 @@
+import {createRef} from 'react';
 import { RouterProvider, createHashRouter, Link, Outlet,Navigate } from "react-router-dom";
 import App from "./../App";
 import Affair from "./../views/affair/affair";
@@ -10,6 +11,7 @@ import ManageAffair from "./../views/manageAffair/manageAffair";
 import CompleteAffair from "./../views/completeAffair/completeAffair";
 import EditAffair from "./../views/editAffair/editAffair";
 import ErrorPage from "../error-page";
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 const router = createHashRouter([
   {
@@ -18,13 +20,13 @@ const router = createHashRouter([
     errorElement: <ErrorPage />,
     redirect: '/affair',
     children: [
-      { path: "/affair", element: <Affair /> },
-      { path: "/thought", element: <Thought /> },
-      { path: "/user", element: <User /> },
-      { path: "/completeAffair/:id", element: <CompleteAffair /> },
-      { path: "/editAffair/:id", element: <EditAffair /> },
-      { path: "/newAffair", element: <NewAffair /> },
-      { path: "/manageAffair", element: <ManageAffair /> },
+      { path: "/affair",name:'affair', element: <Affair /> , nodeRef: createRef()},
+      { path: "/thought",name:'thought', element: <Thought />, nodeRef: createRef() },
+      { path: "/user",name:'user', element: <User />, nodeRef: createRef() },
+      { path: "/completeAffair/:id",name:'completeAffair', element: <CompleteAffair />, nodeRef: createRef() },
+      { path: "/editAffair/:id",name:'editAffair', element: <EditAffair />, nodeRef: createRef() },
+      { path: "/newAffair",name:'newAffair', element: <NewAffair />, nodeRef: createRef() },
+      { path: "/manageAffair",name:'manageAffair', element: <ManageAffair />, nodeRef: createRef() },
       // 这里
       {
         path: "",
@@ -32,15 +34,15 @@ const router = createHashRouter([
       }
     ],
   },
-  {path: "/affair",element: <Affair />},
-  {path: "/thought",element: <Thought />},
-  {path: "/user",element: <User />},
-  {path: "/completeAffair/:id",element: <CompleteAffair />},
-  { path: "/editAffair/:id", element: <EditAffair /> },
-  {path: "/login",element: <Login />},
-  {path: "/sign",element: <Sign />},
-  { path: "/newAffair", element: <NewAffair /> },
-  { path: "/manageAffair", element: <ManageAffair /> }
+  {path: "/affair",name:'affair',element: <Affair />, nodeRef: createRef()},
+  {path: "/thought",name:'thought',element: <Thought />, nodeRef: createRef()},
+  {path: "/user",name:'user',element: <User />, nodeRef: createRef()},
+  {path: "/completeAffair/:id",name:'completeAffair',element: <CompleteAffair />, nodeRef: createRef()},
+  { path: "/editAffair/:id",name:'editAffair', element: <EditAffair />, nodeRef: createRef() },
+  {path: "/login",name:'login',element: <Login />, nodeRef: createRef()},
+  {path: "/sign",name:'sign',element: <Sign />, nodeRef: createRef()},
+  { path: "/newAffair",name:'newAffair', element: <NewAffair /> , nodeRef: createRef()},
+  { path: "/manageAffair",name:'manageAffair', element: <ManageAffair />, nodeRef: createRef() }
 ]);
 
 export default router;
