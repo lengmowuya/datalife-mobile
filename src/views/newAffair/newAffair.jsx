@@ -2,7 +2,8 @@ import React,{useState,useEffect} from 'react';
 import axios from 'axios';
 import { Button } from 'antd';
 import {
-    EditOutlined
+    EditOutlined,
+    CarryOutOutlined
   } from '@ant-design/icons'
 import { useParams,useNavigate  } from 'react-router-dom';
 import './newAffair.less'
@@ -28,7 +29,7 @@ const NewAffair = ()=>{
             owner : userId,
             name:affairName,
             describe:affairDescribe,
-            icon:iconList[activeIconIndex].font_class
+            icon:iconList[activeIconIndex]._id
         }
         axios.post(Config.getIp()+'/affair/add',newAffair)
             .then(docs=>{
@@ -50,11 +51,11 @@ const NewAffair = ()=>{
     },[])
     return (
         <div id='NewAffair' onClick={(e)=>{setPanelActive(false);}}>
-            <h3>新建事务</h3>
+            <h3><CarryOutOutlined />新建事务</h3>
             <div className="head">
                 <div className='iconContainer' onClick={(e)=>{e.stopPropagation();setPanelActive(!panelActive);}}>
                     <svg className='icon' aria-hidden="true" >
-                        {iconList.length != 0  ? <use href={'#icon-' + iconList[activeIconIndex].font_class} /> : ''}
+                        {iconList.length != 0  ? <use href={`#icon${iconList[activeIconIndex].group}-` + iconList[activeIconIndex].font_class} /> : ''}
                     </svg>
                     <div className="editTip">
                     <   EditOutlined />
@@ -75,14 +76,16 @@ const NewAffair = ()=>{
                 onChange={(e) => setAffairDescribe(e.target.value)} 
                 cols="30" rows="10" placeholder="事务描述"
             />
-            <Button 
-                type="primary" className='affairFinish' 
-                onClick={CreateAffair.bind(this,affairContext)}
-            >创建</Button>
-            <Button 
-                type="primary" className='affairCancel' 
-                onClick={()=>{navigate('/affair')}}
-            >返回</Button>
+            <div className="buttonMenu">
+                <Button 
+                    type="primary" className='affairFinish' 
+                    onClick={CreateAffair.bind(this,affairContext)}
+                >创建</Button>
+                <Button 
+                    type="primary" className='affairCancel' 
+                    onClick={()=>{navigate('/affair')}}
+                >返回</Button>
+            </div>
             <div 
                 id='IconPanel'
                 className={[panelActive?'active':'']} 
@@ -90,7 +93,7 @@ const NewAffair = ()=>{
             >
                 <div className='scrollHand'>
                     <svg className='icon' aria-hidden="true">
-                        {iconList.length != 0  ? <use href={'#icon-' + iconList[activeIconIndex].font_class} /> : ''}
+                        {iconList.length != 0  ? <use href={`#icon${iconList[activeIconIndex].group}-` + iconList[activeIconIndex].font_class} /> : ''}
                     </svg>
                     <p>{iconList.length != 0  ?iconList[activeIconIndex].name:''}</p>
                 </div>
@@ -105,7 +108,7 @@ const NewAffair = ()=>{
                                     title={item.name}
                                 >
                                     <svg className='icon' aria-hidden="true">
-                                        <use href={'#icon-' + item.font_class}  />
+                                        <use href={`#icon${item.group}-` + item.font_class}  />
                                     </svg>
                                 </div>
                             )

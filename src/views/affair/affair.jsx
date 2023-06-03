@@ -27,10 +27,12 @@ const Affair = ()=>{
         if(!userId) return;
         axios.get(Config.getIp()+'/affair/all/'+ userId)
             .then(docs=>{
+                console.log(docs);
                 setAffairList(docs.data);
             })
         axios.get(Config.getIp()+'/affairRecord/today/'+ userId)
             .then(docs=>{
+                console.log(docs);
                 setTodayRecords(docs.data);
             })
     },[])

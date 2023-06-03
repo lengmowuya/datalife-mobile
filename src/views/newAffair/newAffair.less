@@ -4,7 +4,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding:15px;
+    padding:30px;
     box-sizing: border-box;
     background:#fff;
     &>h3{
@@ -31,8 +31,8 @@
             align-items: center;
             justify-self: center;
             // border:1px solid #eee;
-            padding:6px;
-            border-radius: 16px;
+            padding:12px;
+            border-radius: 10px;
             transition: all 0.2s;
             box-shadow: 0px 0px 8px #1677ff33;
             position: relative;
@@ -40,13 +40,13 @@
                 opacity: 0.5;
             }
             .icon{
-                width:80px;
-                height:80px;
+                width:60px;
+                height:60px;
             }
             .editTip{
                 position: absolute;
-                right:12px;
-                bottom:12px;
+                right:10px;
+                bottom:10px;
                 // transform: translateX(-50%) translateY(-50%);
                 width:20px;
                 height:20px;    
@@ -72,7 +72,7 @@
         width:100%;
         margin:10px;
         border-radius: 10px;
-        padding:18px;
+        padding:14px;
         box-sizing: border-box;
         font-size:24px;
         letter-spacing: 1px;
@@ -86,27 +86,36 @@
             margin-bottom:20px;
         }
     }
-    .affairFinish,
-    .affairCancel{
-        margin:10px;
-        height:54px;
-        font-size:20px;
+    .buttonMenu{
+        display:flex;
+        align-items: center;
+        justify-content: center;
         width:100%;
-        transition: all 0.3s;
-        &:active{
-            background-color: #0958d9;
+        margin-top:20px;
+        .affairFinish,
+        .affairCancel{
+            // margin:10px;
+            height:44px;
+            font-size:20px;
+            width:100%;
+            transition: all 0.3s;
+            &:active{
+                background-color: #0958d9;
+            }
+        }
+        .affairCancel{
+            // margin-top:0px;
+            // opacity: 0.2;
+            margin-left:10px;
+            background:#f9f9f9;
+            border:1px solid #eee;
+            color:#999;
+            &:active{
+                background-color: #eee;
+            }
         }
     }
-    .affairCancel{
-        margin-top:0px;
-        // opacity: 0.2;
-        background:#f9f9f9;
-        border:1px solid #eee;
-        color:#999;
-        &:active{
-            background-color: #eee;
-        }
-    }
+
     
 }
 #NewAffair > #IconPanel{
@@ -130,8 +139,8 @@
         display:flex;
         align-items: center;
         justify-content: center;
-        padding:10px;
-        padding-bottom:24px;
+        padding:4px;
+        padding-bottom:12px;
         vertical-align: middle;
         flex-direction: column;
         p{
@@ -145,8 +154,8 @@
             cursor: pointer;
         }
         svg{
-            width:80px;
-            height:80px;
+            width:60px;
+            height:60px;
             margin-top:2px;
             margin-left:2px;
             transition:all 1s;
@@ -155,7 +164,7 @@
     .iconList{
         width:100%;
         background:rgba(55, 99, 170, 0.11);
-        padding:10px;
+        padding:6px;
         // padding-top:0px;
         box-sizing: border-box;
         display:flex;
@@ -163,7 +172,7 @@
         margin:0px;
         min-height: 400px;
         // max-height: 100%;
-        height:400px;
+        height:320px;
         display:flex;
         flex-wrap: wrap;
         overflow-y: scroll;
@@ -173,14 +182,13 @@
             // max-width: 20%;
             display:flex;
             flex-grow: 1;
-            
-            padding:4px;
+            padding:3px;
             align-items: center;
             // align-content: space-around;
             justify-content: center;
             background:#fff;
             border-radius: 6px;
-            margin:4px;
+            margin:2px;
             border:2px solid #eee;
             transition: all 0.3s;
             &.active{
@@ -188,8 +196,8 @@
                 box-shadow: 0px 0px 6px #1677ff99;
             }
             svg{
-                width:38px;
-                height:38px;
+                width:40px;
+                height:40px;
 
             }
         }
@@ -219,13 +227,8 @@
         }
     }
     &.active{
-        transform: translateY(-60px) translateX(-50%) !important;
+        transform: translateY(-53px) translateX(-50%) !important;
         border:none;
         box-shadow: 0px 0px 60px #4d97e766;
-        // .scrollHand{
-        //     svg{
-        //         transform: rotateZ(180deg);
-        //     }
-        // }
     }
 }

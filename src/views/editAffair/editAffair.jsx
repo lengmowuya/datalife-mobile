@@ -3,7 +3,8 @@ import axios from 'axios';
 import { Button } from 'antd';
 import {
     EditOutlined,
-    DeleteOutlined
+    DeleteOutlined,
+    FormOutlined
   } from '@ant-design/icons'
 import { useParams,useNavigate  } from 'react-router-dom';
 import './editAffair.less'
@@ -30,7 +31,7 @@ const EditAffair = ()=>{
             id,
             name:affairName,
             describe:affairDescribe,
-            icon:iconList[activeIconIndex].font_class
+            icon:iconList[activeIconIndex]._id
         }
         axios.post(Config.getIp()+'/affair/update',newAffair)
             .then(docs=>{
@@ -55,7 +56,8 @@ const EditAffair = ()=>{
             // 设置图标索引
             let index = 0;
             iconList.forEach((item,i)=>{
-                if(item.font_class == affair.icon){index=i}
+                // console.log(item._id,affair.icon);
+                if(item._id == affair.icon._id){index=i}
             });
             setActiveIconIndex(index);
         })
@@ -64,7 +66,7 @@ const EditAffair = ()=>{
     useEffect(()=>{
         axios.get(Config.getIp()+'/icon/all')
             .then(docs=>{
-                console.log(docs.data);
+                // console.log(docs.data);
                 setIconList(docs.data);
                 setActiveIconIndex(0);
             })
@@ -90,11 +92,11 @@ const EditAffair = ()=>{
 
     return (
         <div id='EditAffair' onClick={(e)=>{setPanelActive(false);}}>
-            <h3>编辑事务</h3>
+            <h3><FormOutlined />编辑事务</h3>
             <div className="head">
                 <div className='iconContainer' onClick={(e)=>{e.stopPropagation();setPanelActive(!panelActive);}}>
                     <svg className='icon' aria-hidden="true" >
-                        {iconList.length != 0  ? <use href={'#icon-' + iconList[activeIconIndex].font_class} /> : ''}
+                        {iconList.length != 0  ? <use href={`#icon${iconList[activeIconIndex].group}-` + iconList[activeIconIndex].font_class} /> : ''}
                     </svg>
                     <div className="editTip">
                     <   EditOutlined />
@@ -132,7 +134,7 @@ const EditAffair = ()=>{
             >
                 <div className='scrollHand'>
                     <svg className='icon' aria-hidden="true">
-                        {iconList.length != 0  ? <use href={'#icon-' + iconList[activeIconIndex].font_class} /> : ''}
+                        {iconList.length != 0  ? <use href={`#icon${iconList[activeIconIndex].group}-` + iconList[activeIconIndex].font_class} /> : ''}
                     </svg>
                     <p>{iconList.length != 0  ?iconList[activeIconIndex].name:''}</p>
                 </div>
@@ -147,7 +149,7 @@ const EditAffair = ()=>{
                                     title={item.name}
                                 >
                                     <svg className='icon' aria-hidden="true">
-                                        <use href={'#icon-' + item.font_class}  />
+                                        <use href={`#icon${item.group}-` + item.font_class}  />
                                     </svg>
                                 </div>
                             )

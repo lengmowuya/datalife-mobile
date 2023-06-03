@@ -6,6 +6,9 @@ import { useParams,useNavigate  } from 'react-router-dom';
 import Config from './../../tools/Config'
 let navigate;
 let affairId;
+import {
+    HighlightOutlined
+  } from '@ant-design/icons'
 let userId = localStorage.getItem('id');
 
 
@@ -34,7 +37,7 @@ function Component (){
     let {id} = useParams();
     affairId = id;
     // let [affairId, setAffairId] = useState(id);
-    let [affair, setAffair] = useState({});
+    let [affair, setAffair] = useState(undefined);
     navigate = useNavigate()
     console.log(userId);
     useEffect(()=>{
@@ -44,20 +47,21 @@ function Component (){
     function mounted(){
         axios.get(Config.getIp()+'/affair/single/'+userId+'/'+affairId)
             .then(docs=>{
+                console.log(docs);
                 setAffair(docs.data);
-                console.log(affair);
+                // console.log(affair);
     
             })
     }
-
+    if(affair == undefined){return ''};
     return (
         <div id='CompleteAffair'>
-            <h3>完成事务</h3>
+            <h3><HighlightOutlined />完成事务</h3>
             {/* <h2>完成事项</h2> */}
             <div className="head">
                 <div className='iconContainer'>
                     <svg className='icon' aria-hidden="true">
-                        <use href={'#icon-' + affair.icon} />
+                        <use href={`#icon${affair.icon.group}-` + affair.icon.font_class} />
                     </svg>
                 </div>
                 <div className="info">

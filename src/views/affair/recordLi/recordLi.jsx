@@ -15,10 +15,10 @@ const RecordLi = (props)=>{
             <div className="head">
                 <div className='iconContainer'>
                     <svg className='icon' aria-hidden="true">
-                        <use href={'#icon-' + item.affair.icon} />
+                        <use href={`#icon${item.affair.icon.group}-${item.affair.icon.font_class}`} />
                     </svg>
                     <svg className='shadow' aria-hidden="true">
-                        <use href={'#icon-' + item.affair.icon} />
+                        <use href={`#icon${item.affair.icon.group}-${item.affair.icon.font_class}`} />
                     </svg>
                 </div>
                 <div className="info">

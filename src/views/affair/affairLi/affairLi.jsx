@@ -14,7 +14,7 @@ class Component extends React.Component {
             <Link to={`/completeAffair/`+item._id} className={styles.content}>
                 <div className={styles.iconContainer}>
                     <svg className={styles.icon} aria-hidden="true">
-                        <use href={'#icon-' + item.icon} />
+                        <use href={`#icon${item.icon.group}-${item.icon.font_class}`} />
                     </svg>
                 </div>
                 <div className="info">
