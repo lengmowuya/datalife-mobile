@@ -11,48 +11,22 @@ html,body{
 }
 
 
-.page {
+.layout-main-page-enter {
+	opacity: 0.6;
+	transition: all 0.2s;
 
 }
-
-.page-enter {
-  position: absolute;
-  left: 15px;
-  right: 15px;
-  transition: all 0.3s;
-  opacity: 0;
-  z-index: 999;
-  transform: scale(1.1);
+.layout-main-page-enter-active {
+	opacity: 1;
+	transition: all 0.2s;
 }
-
-.page-enter-active {
-  position: absolute;
-  left: 15px;
-  right: 15px;
-  transition: all 0.3s;
-  opacity: 1;
-  z-index: 999;
-  transform: scale(1);
-  transition: opacity 300ms, transform 300ms;
+.layout-main-page-exit {
+	opacity: 1;
+	transition: all 0.2s;
 }
-
-.page-exit {
-  position: absolute;
-  left: 15px;
-  right: 15px;
-  transition: all 0.3s;
-  opacity: 1;
-  transform: scale(1);
-}
-
-.page-exit-active {
-  position: absolute;
-  left: 15px;
-  right: 15px;
-  transition: all 0.3s;
-  opacity: 0;
-  transform: scale(0.9);
-  transition: opacity 300ms, transform 300ms;
+.layout-main-page-exit-active {
+	opacity: 0;
+	transition: all 0.2s;
 }
 
 
@@ -63,6 +37,7 @@ html,body{
     flex-grow: 1;
     background:#e9e9f0;
     overflow-y: scroll;
+    position: relative;
     // border:1px solid blue;
 }
 nav{

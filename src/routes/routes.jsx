@@ -13,27 +13,7 @@ import EditAffair from "./../views/editAffair/editAffair";
 import ErrorPage from "../error-page";
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
-const router = createHashRouter([
-  {
-    path: "/",
-    element: <App />,
-    errorElement: <ErrorPage />,
-    redirect: '/affair',
-    children: [
-      { path: "/affair",name:'affair', element: <Affair /> , nodeRef: createRef()},
-      { path: "/thought",name:'thought', element: <Thought />, nodeRef: createRef() },
-      { path: "/user",name:'user', element: <User />, nodeRef: createRef() },
-      { path: "/completeAffair/:id",name:'completeAffair', element: <CompleteAffair />, nodeRef: createRef() },
-      { path: "/editAffair/:id",name:'editAffair', element: <EditAffair />, nodeRef: createRef() },
-      { path: "/newAffair",name:'newAffair', element: <NewAffair />, nodeRef: createRef() },
-      { path: "/manageAffair",name:'manageAffair', element: <ManageAffair />, nodeRef: createRef() },
-      // 这里
-      {
-        path: "",
-        element: <Navigate to="affair" replace />
-      }
-    ],
-  },
+const routes = [
   {path: "/affair",name:'affair',element: <Affair />, nodeRef: createRef()},
   {path: "/thought",name:'thought',element: <Thought />, nodeRef: createRef()},
   {path: "/user",name:'user',element: <User />, nodeRef: createRef()},
@@ -42,7 +22,28 @@ const router = createHashRouter([
   {path: "/login",name:'login',element: <Login />, nodeRef: createRef()},
   {path: "/sign",name:'sign',element: <Sign />, nodeRef: createRef()},
   { path: "/newAffair",name:'newAffair', element: <NewAffair /> , nodeRef: createRef()},
-  { path: "/manageAffair",name:'manageAffair', element: <ManageAffair />, nodeRef: createRef() }
+  { path: "/manageAffair",name:'manageAffair', element: <ManageAffair />, nodeRef: createRef() },
+  {
+    path: "",
+    element: <Navigate to="affair" replace />
+  }
+]
+
+const router = createHashRouter([
+  {
+    path: "/",
+    element: <App />,
+    errorElement: <ErrorPage />,
+    redirect: '/affair',
+    children: routes.map((route) => ({
+                index: route.path === '/',
+                path: route.path === '/' ? undefined : route.path,
+                element: route.element,
+              }))
+  },
+
 ]);
+
+
 
 export default router;

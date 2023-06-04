@@ -10,12 +10,12 @@ import Tool from './tools/Tools'
 import { Button, message, Space } from 'antd';
 import  {TransitionGroup, CSSTransition,SwitchTransition}  from 'react-transition-group'
 import axios from 'axios';
-
+console.log(Object);
 export default function Root() {
     const [messageApi, contextHolder] = message.useMessage();
     let navigate = useNavigate();
-    const currentOutlet = useOutlet();
     const location = useLocation();
+    const currentOutlet = useOutlet();
     useEffect(()=>{
       if(!localStorage.getItem('token')){
         navigate('/login');
@@ -56,22 +56,16 @@ export default function Root() {
                 });
             })
 
-    const { nodeRef } = router.find((route) => route.path === location.pathname) ?? {}
     return (
       <div className='app'>
         {contextHolder}
         <div className="detail">
-        <TransitionGroup>
-          <CSSTransition nodeRef={nodeRef} timeout={300} className="page" unmountOnExit key={location.pathname}>
             {/* <Outlet /> */}
-            {/* {currentOutlet} */}
-            {(state) => (
-              <div ref={nodeRef} className="page">
-                {currentOutlet}
-              </div>
-            )}
-            </CSSTransition>
-  </TransitionGroup>
+            <SwitchTransition mode="out-in">
+								<CSSTransition key={location.pathname} timeout={200} classNames="layout-main-page">
+									{currentOutlet}
+								</CSSTransition>
+							</SwitchTransition>
         </div>
         <nav>
           <ul>

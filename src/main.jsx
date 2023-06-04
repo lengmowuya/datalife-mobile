@@ -11,9 +11,6 @@ import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   // <React.StrictMode>
-  // <HashRouter>
-
-        <RouterProvider router={router} />
-
+    <RouterProvider router={router} />
   // </React.StrictMode>,
 )
