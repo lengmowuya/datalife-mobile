@@ -1,4 +1,4 @@
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Checkbox, Form, Input ,message } from 'antd';
 import {NavLink,useNavigate} from 'react-router-dom';
 // import {useState,useRef} from 'react';
 import axios from 'axios';
@@ -9,6 +9,8 @@ import imgUrl from './../../assets/DataLife.png';
 const Login = () => {
     let navigate = useNavigate();
     const [form] = Form.useForm();
+    const [messageApi, contextHolder] = message.useMessage();
+
     const onFinish = (data) => {
         data.passward =  data.password;
         axios.post(Config.getIp()+'/user/login',data)
@@ -23,7 +25,10 @@ const Login = () => {
                     localStorage.setItem('headImg',data.user.headImg);
                     navigate('/affair');
                 }else{
-                    alert("登录失败,请检查账密后重试");
+                    messageApi.open({
+                        type: 'error',
+                        content: "登录失败,请检查账密后重试",
+                      });
                     form.setFieldsValue({
                         'email':'',
                         'password':''
@@ -37,6 +42,7 @@ const Login = () => {
 
     return (
         <div id="Login">
+            {contextHolder}
             <div className="header">
                 <img src={imgUrl} alt="" />
                 <h1>DataLife</h1>

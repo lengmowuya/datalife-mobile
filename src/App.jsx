@@ -27,34 +27,35 @@ export default function Root() {
           window.location.href= Tool.config.normalAddress;
       }
     })
-            // 请求拦截器-添加token信息
-            axios.interceptors.request.use(function (config) {
-              config.headers.token = localStorage.getItem('token');
-              return config;
-            }, function (error) {
-              // axios发生错误的处理
-              return Promise.reject(error);
+
+    // 请求拦截器-添加token信息
+    axios.interceptors.request.use(function (config) {
+      config.headers.token = localStorage.getItem('token');
+      return config;
+    }, function (error) {
+      // axios发生错误的处理
+      return Promise.reject(error);
+    });
+    // 请求响应器-响应token是否正常
+    axios.interceptors.response.use(res => {
+        if(res.data.error ==  1 && res.data.type == 'tokenError'){
+            messageApi.open({
+              type: 'error',
+              content: "用户Token已过期,请重新登录"
             });
-            // 请求响应器-响应token是否正常
-            axios.interceptors.response.use(res => {
-                if(res.data.error ==  1 && res.data.type == 'tokenError'){
-                    messageApi.open({
-                      type: 'error',
-                      content: "用户Token已过期,请重新登录"
-                    });
-                    navigate('/login');
-                    return Promise.reject(new Error("Error Message"))
-                }
-                else {
-                    return Promise.resolve(res)
-                }
-              },
-              err => {
-                messageApi.open({
-                  type: 'error',
-                  content: "用户Token已过期,请重新登录"
-                });
-            })
+            navigate('/login');
+            return Promise.reject(new Error("Error Message"))
+        }
+        else {
+            return Promise.resolve(res)
+        }
+      },
+      err => {
+        messageApi.open({
+          type: 'error',
+          content: "用户Token已过期,请重新登录"
+        });
+    })
 
     return (
       <div className='app'>
@@ -67,27 +68,29 @@ export default function Root() {
 								</CSSTransition>
 							</SwitchTransition>
         </div>
-        <nav>
-          <ul>
-            <NavLink
-              className={({isActive}) => isActive?"active":""} 
-              to={`affair`}>
-              <div>
-                  <HomeOutlined />事务
-              </div>
-            </NavLink>
-            <NavLink
-              className={({isActive}) => isActive?"active":""} 
-              to={`thought`}>
-              <div><BulbOutlined />想法</div>
-            </NavLink>
-            <NavLink
-              className={({isActive}) => isActive?"active":""} 
-              to={`user`}>
-              <div><UserOutlined />生涯</div>
-            </NavLink>
-          </ul>
-        </nav>
+        {
+          location.pathname != '/login' && location.pathname != '/sign'?<nav>
+            <ul>
+              <NavLink
+                className={({isActive}) => isActive?"active":""} 
+                to={`affair`}>
+                <div>
+                    <HomeOutlined />事务
+                </div>
+              </NavLink>
+              <NavLink
+                className={({isActive}) => isActive?"active":""} 
+                to={`thought`}>
+                <div><BulbOutlined />想法</div>
+              </NavLink>
+              <NavLink
+                className={({isActive}) => isActive?"active":""} 
+                to={`user`}>
+                <div><UserOutlined />生涯</div>
+              </NavLink>
+            </ul>
+          </nav>:''
+        }
       </div>
     );
   }

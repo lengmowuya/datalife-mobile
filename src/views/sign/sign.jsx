@@ -14,14 +14,16 @@ const Sign = () => {
     const [messageApi, contextHolder] = message.useMessage();
     let emailReg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
     const onFinish = (data) => {
-        // console.log('Success:', data);
         data.passward =  data.password;
         axios.post(Config.getIp()+'/user/sign',data)
             .then(docs=>{
                 console.log(docs);
                 let data = docs.data;
                 if(data.type == 'success'){
-                    alert('注册成功,欢迎您!');
+                    messageApi.open({
+                        type: 'success',
+                        content: '注册成功,欢迎您!',
+                      });
                     localStorage.setItem('id',data.id);
                     localStorage.setItem('token',data.token);
                     localStorage.setItem('email',data.user.email);
@@ -29,11 +31,16 @@ const Sign = () => {
                     localStorage.setItem('headImg',data.user.headImg);
                     navigate('/affair');
                 }else if(data.type == 'exist'){
-                    alert("注册用户已存在,请登录!");
+                    messageApi.open({
+                        type: 'warning',
+                        content: '该用户已存在,请直接登录',
+                      });
                     navigate('/login');
                 }else{
-
-                    alert("注册错误!请联系DataLife管理员");
+                    messageApi.open({
+                        type: 'error',
+                        content: '注册错误!请联系DataLife管理员',
+                      });
                     // console.log(form,form.setFieldsValue);
                     form.setFieldsValue({
                         'email':'',
@@ -57,8 +64,6 @@ const Sign = () => {
               });
             return;
         }
-
-        console.log(email);
         setSendCode(true);
         axios.post(Config.getIp()+'/user/sign/sendEmailCode',{email})
             .then(docs=>{

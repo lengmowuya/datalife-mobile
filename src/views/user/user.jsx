@@ -100,10 +100,6 @@ const User = ()=>{
           };
         myChart.setOption(option);
     })
-    // 绘制图表
-
-    // render() {  
-        // let {headImg,name,email} = this.state;
     return (
         <div id='User'>
             <div className="userInfo">
@@ -120,9 +116,6 @@ const User = ()=>{
                 <ThoughtCareer />
             </div>
             <div className="menu">
-                {/* <div className="itemLine setting">
-                    <SettingOutlined />设置
-                </div> */}
                 <div className="itemLine loginOut" onClick={loginOut.bind(this)}>
                     <ExportOutlined />登出
                 </div>

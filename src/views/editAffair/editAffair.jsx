@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import axios from 'axios';
-import { Button } from 'antd';
+import { Button,message } from 'antd';
 import {
     EditOutlined,
     DeleteOutlined,
@@ -21,12 +21,17 @@ const EditAffair = ()=>{
     let [affairDescribe,setAffairDescribe] = useState('');
     let [panelActive,setPanelActive] = useState(false);
     let [activeIconIndex,setActiveIconIndex] = useState(0);
+    const [messageApi, contextHolder] = message.useMessage();
+
     useEffect(()=>{
         userId = localStorage.getItem('id');
     })
     const CreateAffair = ()=>{
         console.log(affairName.trim(),affairDescribe.trim());
-        if(!affairName.trim() || !affairDescribe.trim()) {alert('名称或描述不能为空!');return;}
+        if(!affairName.trim() || !affairDescribe.trim()) {                    messageApi.open({
+            type: 'warning',
+            content: '名称或描述不能为空!'
+          });return;}
         let newAffair = {
             id,
             name:affairName,
@@ -49,14 +54,12 @@ const EditAffair = ()=>{
         axios.get(Config.getIp()+'/affair/single/'+userId+'/'+id)
         .then(docs=>{
             let affair = docs.data;
-            // console.log(affair);
             setAffairName(affair.name);
             setAffairDescribe(affair.describe);
             setAffairDescribe(affair.describe);
             // 设置图标索引
             let index = 0;
             iconList.forEach((item,i)=>{
-                // console.log(item._id,affair.icon);
                 if(item._id == affair.icon._id){index=i}
             });
             setActiveIconIndex(index);
@@ -92,6 +95,7 @@ const EditAffair = ()=>{
 
     return (
         <div id='EditAffair' onClick={(e)=>{setPanelActive(false);}}>
+            {contextHolder}
             <h3><FormOutlined />编辑事务</h3>
             <div className="head">
                 <div className='iconContainer' onClick={(e)=>{e.stopPropagation();setPanelActive(!panelActive);}}>
