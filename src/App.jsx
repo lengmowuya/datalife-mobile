@@ -56,9 +56,11 @@ export default function Root() {
           content: "用户Token已过期,请重新登录"
         });
     })
-
     return (
       <div className='app'>
+        <div className="mobileHint">
+          完整功能请访问DataLife桌面端
+        </div>
         {contextHolder}
         <div className="detail">
             {/* <Outlet /> */}
@@ -69,7 +71,7 @@ export default function Root() {
 							</SwitchTransition>
         </div>
         {
-          location.pathname != '/login' && location.pathname != '/sign'?<nav>
+          (location.pathname != '/login' && location.pathname != '/sign')?<nav>
             <ul>
               <NavLink
                 className={({isActive}) => isActive?"active":""} 
